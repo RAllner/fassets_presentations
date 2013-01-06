@@ -22,7 +22,6 @@ Gem::Specification.new do |s|
   s.add_dependency "jquery-rails"
   s.add_dependency "bibtex-ruby"
   s.add_dependency "citeproc-ruby"
-  s.add_dependency "fassets_core", "~> 0.4.0"
 
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "devise"
