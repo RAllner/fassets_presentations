@@ -10,7 +10,7 @@ gem "jquery-rails"
 gem "devise"
 gem "haml"
 gem "fassets_core", :git => "git://github.com/RAllner/fassets_core.git"
-
+#gem "fassets_core", path: "../fassets_core"
 group :development do
   gem 'meta_request', '0.2.1'
 end
