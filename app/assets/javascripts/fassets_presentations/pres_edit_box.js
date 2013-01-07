@@ -25,9 +25,6 @@ $(document).ready(function(){
       $("#markup_button").click();
     }
   });
-  if ($("#slots_wysiwyg").length > 0){
-    $(".wysiwyg_button").hide();
-  }
   $("#fancybox-content .asset_submit_button").live("click",function(event){
     event.preventDefault();
     $.fancybox.showActivity();
