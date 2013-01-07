@@ -50,6 +50,7 @@ module FassetsPresentations
       end
       render :template => "fassets_presentations/frames/edit", :layout => "fassets_presentations/application", :locals => {:is_root_frame => is_root_frame}
     end
+    #zeig mir alle frames
     def showFrame
       logger.debug("Entered Frames#show")
       render :template => "fassets_presentations/frames/show", :layout => "layouts/fassets_presentations/frame"
