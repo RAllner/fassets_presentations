@@ -1,19 +1,9 @@
-=javascript_include_tag 'fassets_presentations/pres_edit_box'
-=stylesheet_link_tag 'fassets_presentations/pres_edit_box'
--if new
-  =form_for @content, :url => asset_content_path(@content),:html => {:multipart => true} do |f|
-    %p
-      %label{:for => 'title'} Title:
-      =text_field :presentation, :title, :value => @content.title
-      #title_warning
-    %p
-      %label{:for => 'template'} Template:
-      =select(:presentation, :template, TemplateManager.outer_templates, { :selected => @content.template ? @content.template : "default"})
--else
+-wysiwyg ||= false
+=fields_for "presentation" do |a|
   %p
-    %label{:for => 'title'} Title:
-    =text_field :presentation, :title, :value => @content.title
-    #title_warning
+    =a.label :title, "Title:" 
+    =a.text_field :title
+    %span#title_warning
   %p
-    %label{:for => 'template'} Template:
-    =select(:presentation, :template, TemplateManager.outer_templates, { :selected => @content.template ? @content.template : "default"})
+    =a.label :template, "Template:" 
+    =a.select(:template, TemplateManager.outer_templates, { :selected => @content.template ? @content.template : "default"})

@@ -3,7 +3,12 @@ Rails.application.routes.draw do
   scope '/mercury' do
     match ':type/:resource' => "mercury#resource"
   end
+  resources :presentations do
+    resources :frames do
+    end
 end
+end
+
 FassetsPresentations::Engine.routes.draw do
   match '/to_markdown' => 'Frames#to_markdown'
   match '/to_html' => 'Frames#to_html'

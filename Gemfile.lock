@@ -79,6 +79,9 @@ GEM
     jquery-rails (2.1.4)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
+    jquery-ui-rails (3.0.0)
+      jquery-rails
+      railties (>= 3.1.0)
     json (1.7.6)
     kramdown (0.14.1)
     latex-decode (0.0.12)
@@ -99,7 +102,7 @@ GEM
     nokogiri (1.5.6)
     orm_adapter (0.4.0)
     polyglot (0.3.3)
-    rack (1.4.1)
+    rack (1.4.2)
     rack-cache (1.2)
       rack (>= 0.4)
     rack-contrib (1.1.0)
@@ -151,5 +154,6 @@ DEPENDENCIES
   fassets_presentations!
   haml
   jquery-rails
+  jquery-ui-rails
   meta_request (= 0.2.1)
   sqlite3
