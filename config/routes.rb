@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
-  match '/editor(/*requested_uri)' => "FassetsPresentations::Frames#editor", :as => :mercury_editor
-  scope '/mercury' do
-    match ':type/:resource' => "mercury#resource"
-  end
-  resources :presentations do
+ resources :presentations do
     resources :frames do
     end
 end

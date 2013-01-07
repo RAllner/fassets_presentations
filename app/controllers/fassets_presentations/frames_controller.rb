@@ -36,6 +36,7 @@ module FassetsPresentations
         render :inline => "/editor"+edit_wysiwyg_presentation_frame_path(@presentation, frame)
       end 
     end
+    #das ist ein editierkommentar
     def edit
       if @frame.parent == nil
         is_root_frame = true
