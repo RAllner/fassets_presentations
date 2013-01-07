@@ -5,10 +5,12 @@ module FassetsPresentations
     before_filter :authenticate_user!, :except => [:show]
     before_filter :find_presentation, :except => [:markup_preview, :to_markdown, :to_html, :citation, :editor, :templates, :rename]
     before_filter :find_frame, :except => [:new, :create, :create_frame_wysiwyg, :sort, :markup_preview, :to_markdown, :to_html, :citation, :frames, :editor, :templates, :rename, :editor_clipboard]
+    # Falls koperte Präsi kopiere frames
     def create
       if params[:id]
         frame = Frame.find(params[:id]).clone();
         frame.presentation_id = @presentation.id
+        # Falls neue Präsi
       else
         position = Frame.where(:presentation_id => @presentation.id).maximum(:position)+1
         frame =  Frame.create(params[:frame].merge({:presentation_id => @presentation.id, :position => position}))
