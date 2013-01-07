@@ -29,9 +29,9 @@ module FassetsPresentations
       end
       slots
     end
-    def path
-      "/fassets_presentations/presentations/#{presentation.id}/frames/#{id}"
-    end
+    #def path
+    #  "/fassets_presentations/presentations/#{presentation.id}/frames/#{id}"
+    #end
     def all_children
       all = []
       self.children.each do |frame|
