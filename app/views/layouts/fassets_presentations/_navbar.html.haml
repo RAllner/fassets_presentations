@@ -1,0 +1,63 @@
+.navbar.navbar-fixed-top
+	.navbar-inner
+		.container-fluid
+			%a.btn.btn-navbar 				
+				%span.icon-bar
+				%span.icon-bar
+				%span.icon-bar
+			%a.brand{:href => "http://www.google.de"}
+				%link(rel="shortcut icon" href="#{asset_path('favicon.png')}")
+				-#test bild eingebunden mit width hotfix, kommt noch inne css
+				%img{:rel => "logoo", :src => "#{asset_path('fassets_presentations/fassets_horizontal_white.png')}", :width => "70px"}
+			.nav-collapse
+				%ul.nav
+					%li.active
+						%a{:href => "#" } Katalog
+				%ul.nav
+					%li.dropdown
+						%a.dropdown-toggle{:href =>"#"} Folie
+						%b.caret
+						%ul.dropdown-menu
+							%li
+								%a{:href => "#"}
+									%i.icon-search
+										R&uuml;ckg&auml;ngig
+							%li
+								%a{:href => "#"}
+									%i.icon-search
+										Vorw&auml;rts
+							%li
+								%a{:href => "#"}
+									%i.icon-search
+										Speichern
+							%li
+								%a{:href => "#"}
+									%i.icon-search
+										L&ouml;schen
+							%li
+								%a{:href => "#"}
+									%i.icon-search
+										Folien&uuml;bersicht
+							%li
+								%a{:href => "#"}
+									%i.icon-search
+										Form &auml;ndern
+				%ul.nav.pull-right
+					%li.dropdown
+						%a{:href => "#"} Username
+						%b.caret
+						%ul.dropdown-menu
+							%li
+								%a{:href => "#"} qwertz
+							%li
+								%a{:href => "#"} qwertz
+							%li
+								%a{:href => "#"} qwertz
+							%li
+								%a{:href => "#"} qwertz
+				%p.navbar-text.pull-right
+					%i.icon-user.icon-white 
+					Logged in as
+
+ 
+   
