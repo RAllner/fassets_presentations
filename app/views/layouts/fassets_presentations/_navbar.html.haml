@@ -42,22 +42,9 @@
 								%a{:href => "#"}
 									%i.icon-search
 										Form &auml;ndern
-				%ul.nav.pull-right
-					%li.dropdown
-						%a{:href => "#"} Username
-						%b.caret
-						%ul.dropdown-menu
-							%li
-								%a{:href => "#"} qwertz
-							%li
-								%a{:href => "#"} qwertz
-							%li
-								%a{:href => "#"} qwertz
-							%li
-								%a{:href => "#"} qwertz
 				%p.navbar-text.pull-right
 					%i.icon-user.icon-white 
-					Logged in as
+					= render :partial => "shared/session"
 
  
    

@@ -4,8 +4,5 @@
 // It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
 // the compiled file.
 //
-//= require fassets_presentations/jquery.ui.nestedSortable
-//= require fassets_presentations/jquery.myimgscale-0.2
 //= require fassets_presentations/frames
-//= require fassets_presentations/sortable_frames
 //= require fassets_presentations/pres_edit_box

@@ -8,6 +8,6 @@
     =javascript_include_tag "fassets_presentations/templates/#{@presentation.template}/script.js"
     %title=@presentation.title
   %body
-    =yield :layout
-    #presentationhelp=render :partial => "fassets_presentations/shared/presentationhelp"
+  	.container
+    	=yield :layout
   

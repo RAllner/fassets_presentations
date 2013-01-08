@@ -2,10 +2,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
-//= require fancybox
-//= require fassets_presentations/jquery.ui.nestedSortable
-//= require jquery.collapsiblePanel-0.2.0
-//= require fassets_presentations/jquery.myimgscale-0.2 
 */
 
 Presentation = function() {
@@ -197,7 +193,7 @@ Selector = function() {
           selectframe(Presentation.getframeIndex() - 1);
           $("#selector").show();
         });
-  }
+    }
   }
   pub.hide = function() {
     $("#selector").animate(_original_dim, 200, "swing", function() {
@@ -230,7 +226,7 @@ Selector = function() {
     Presentation.showframe(_index + 1);
   }
   return pub;
-  }();
+}();
 
 
 function initPresentation(){
@@ -241,29 +237,29 @@ function initPresentation(){
     switch(event.keyCode) {
       case 37: //Left
       case 33: //PgUp
-        if (!Selector.isVisible()) Presentation.previousframe();
-        break;
+      if (!Selector.isVisible()) Presentation.previousframe();
+      break;
       case 39: //Right
       case 32: //Space
       case 34: //PgDown
-        if (!Selector.isVisible()) Presentation.nextframe();
-        break;
+      if (!Selector.isVisible()) Presentation.nextframe();
+      break;
       case 38: //Up
-        Selector.previous();
-        break;
+      Selector.previous();
+      break;
       case 40: //Down
-        Selector.next();
-        break;
+      Selector.next();
+      break;
       case 27: //ESC
-        Selector.hide();
-        if ($("#presentationhelp").attr("style") == "visibility: visible;"){
-          $("#presentationhelp").css('visibility','hidden');
-        }
-        break;
+      Selector.hide();
+      if ($("#presentationhelp").attr("style") == "visibility: visible;"){
+        $("#presentationhelp").css('visibility','hidden');
+      }
+      break;
       case 13: //Enter
-        if (Selector.isVisible()) Selector.confirm();
-        if (num != null) Presentation.showframe(num);
-        break;
+      if (Selector.isVisible()) Selector.confirm();
+      if (num != null) Presentation.showframe(num);
+      break;
 //        case 49: //1
 //          Presentation.previousImage();
 //          break;
@@ -280,73 +276,66 @@ function initPresentation(){
       case 55: // 7
       case 56: // 8
       case 57: // 9
-        if (num == null){
-          num = event.keyCode - 48;
-        } else {
-          num = 10 * num + event.keyCode - 48;
-        }
-        setTimeout(function() { num = null;},3000);
-        break;
+      if (num == null){
+        num = event.keyCode - 48;
+      } else {
+        num = 10 * num + event.keyCode - 48;
+      }
+      setTimeout(function() { num = null;},3000);
+      break;
       case 74: // j
-        var index = prompt("Jump to frame number:");
-        if (index == null) break;
-        if (index == "") break;
-        Presentation.showframe(index);
-        break;
+      var index = prompt("Jump to frame number:");
+      if (index == null) break;
+      if (index == "") break;
+      Presentation.showframe(index);
+      break;
       case 69: // e
-        edit_link = $("div[id="+Presentation.getframeIndex()+"] a").attr("href");
-        window.location.href = edit_link;
-        break;
+      edit_link = $("div[id="+Presentation.getframeIndex()+"] a").attr("href");
+      window.location.href = edit_link;
+      break;
       case 66: // b
       case 83: // s
-        if ($("#white_dimmer").is(":visible")){
-          $("#white_dimmer").hide();
-          $("#black_dimmer").show();
-          break;
-        }
-        if ($("#black_dimmer").is(":visible")){
-          $("#black_dimmer").fadeOut();
-        } else {
-          $("#black_dimmer").fadeIn();
-        }
+      if ($("#white_dimmer").is(":visible")){
+        $("#white_dimmer").hide();
+        $("#black_dimmer").show();
         break;
+      }
+      if ($("#black_dimmer").is(":visible")){
+        $("#black_dimmer").fadeOut();
+      } else {
+        $("#black_dimmer").fadeIn();
+      }
+      break;
       case 78: // n
-        toggleNavigationMenu();
-        break;
+      toggleNavigationMenu();
+      break;
       case 87: // w
-        if ($("#black_dimmer").is(":visible")){
-          $("#black_dimmer").hide();
-          $("#white_dimmer").show();
-          break;
-        }
-        if ($("#white_dimmer").is(":visible")){
-          $("#white_dimmer").fadeOut();
-        } else {
-          $("#white_dimmer").fadeIn();
-        }
+      if ($("#black_dimmer").is(":visible")){
+        $("#black_dimmer").hide();
+        $("#white_dimmer").show();
         break;
+      }
+      if ($("#white_dimmer").is(":visible")){
+        $("#white_dimmer").fadeOut();
+      } else {
+        $("#white_dimmer").fadeIn();
+      }
+      break;
       case 72: // h
-        if ($("#presentationhelp").attr("style") == "visibility: visible;") {
-          $("#presentationhelp").css('visibility','hidden');
-        } else {
-          $("#presentationhelp").css('visibility','visible');
-        }
-        break;
+      if ($("#presentationhelp").attr("style") == "visibility: visible;") {
+        $("#presentationhelp").css('visibility','hidden');
+      } else {
+        $("#presentationhelp").css('visibility','visible');
+      }
+      break;
     }
     console.log(event.keyCode);
   });
 
-  $(window).resize(function(event){
-    $("#black_dimmer").css("height", $(window).height());
-    $("#white_dimmer").css("height", $(window).height());
-    Selector.hide();
-  });
+$(window).resize(function(event){
+  $("#black_dimmer").css("height", $(window).height());
+  $("#white_dimmer").css("height", $(window).height());
+  Selector.hide();
+});
 
-  //Fancy Image Zooming
-  $('a.zoom').fancybox({
-    'transitionIn'	:	'elastic',
-    'transitionOut'	:	'elastic',
-    'speedIn'		:	400,
-    'speedOut'		:	200
-  });
 }

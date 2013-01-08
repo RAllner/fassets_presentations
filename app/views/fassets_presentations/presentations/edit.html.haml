@@ -1,3 +1,20 @@
+-# We do have @content here which is the current... <content> ;_;
+-# i dont know what im doing
+-#
+
+.modal-header
+  %a.close{data:{dismiss: "modal"}}
+    ×
+  %h3
+    This is a Modal Heading
+.modal-body
+  #content
+    =@content.media_type.capitalize
+  #title
+    =link_to @content.asset.name, presentation_path(@content)
+
+-#todo... ;) --->
+
 =content_for :h1 do
   #type
     =@content.media_type.capitalize
@@ -6,8 +23,7 @@
   #action
     %span.action
       =button_to "Delete", delete_presentation_path(@content), :method => :delete, :onclick => "return confirm('Are you sure?')"
-      =render :partial => "assets/put_on_tray"
-      =button_to "Create Copy", presentation_copy_path(@content), :method => :copy, :onclick => "return confirm('Do you really want to create a copy?')"
+       =button_to "Create Copy", presentation_copy_path(@content), :method => :copy, :onclick => "return confirm('Do you really want to create a copy?')"
 
 #sidebar
   =render :partial => "assets/classification", :locals => {:asset => @content.asset}
