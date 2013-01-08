@@ -4,11 +4,13 @@ module FassetsPresentations
     include FramesHelper
     before_filter :authenticate_user!, :except => [:show]
     before_filter :find_presentation, :except => [:markup_preview, :to_markdown, :to_html, :citation, :editor, :templates, :rename]
-    before_filter :find_frame, :except => [:new, :create, :create_frame_wysiwyg, :sort, :markup_preview, :to_markdown, :to_html, :citation, :frames, :editor, :templates, :rename, :editor_clipboard]
+    before_filter :find_frame, :except => [:new, :create, :sort, :markup_preview, :to_markdown, :to_html, :citation, :frames, :editor, :templates, :rename]
+    # Falls koperte Präsi kopiere frames
     def create
       if params[:id]
         frame = Frame.find(params[:id]).clone();
         frame.presentation_id = @presentation.id
+        # Falls neue Präsi
       else
         position = Frame.where(:presentation_id => @presentation.id).maximum(:position)+1
         frame =  Frame.create(params[:frame].merge({:presentation_id => @presentation.id, :position => position}))
@@ -27,14 +29,6 @@ module FassetsPresentations
     end
     def new_frame
       render :template => "fassets_presentations/frames/new", :layout => false
-    end
-    def create_frame_wysiwyg
-      position = Frame.where(:presentation_id => @presentation.id).maximum(:position)+1
-      frame =  Frame.create(params[:frame].merge({:presentation_id => @presentation.id, :position => position}))
-      if frame.save
-        update_positions();
-        render :inline => "/editor"+edit_wysiwyg_presentation_frame_path(@presentation, frame)
-      end 
     end
     #das ist ein editierkommentar
     def edit
@@ -58,71 +52,12 @@ module FassetsPresentations
     def editor
       render :text => '', :layout => 'fassets_presentations/mercury'
     end
-    def edit_wysiwyg
-      if @frame.parent == nil
-        is_root_frame = true
-        if @frame.children.first
-          @frame = @frame.children.first
-          redirect_to edit_wysiwyg_presentation_frame_path(@presentation, @frame)
-          return
-        end
-      else
-        is_root_frame = false
-      end 
-      render :template => "fassets_presentations/frames/edit_wysiwyg", :layout => "fassets_presentations/editor", :locals => {:is_root_frame => is_root_frame}      
-    end
-    def edit_wysiwyg_save
-      if params[:commit] == "Rename"
-        @frame.update_attributes(:title => params[:title])
-        render :inline => "" 
-      end
-      logger.debug(params[:frame][:content][:top])
-      begin
-        @frame.slots.each do |slot|
-          logger.debug("Slot:"+slot.name)
-          begin
-            logger.debug(html_to_markdown(params[:frame][:content][slot.name][:value]))
-            params[:frame][:content][slot.name][:markup] = html_to_markdown(params[:frame][:content][slot.name][:value])
-            params[:frame][:content][slot.name].delete(:value)
-          rescue
-            params[:frame][:content][slot.name][:markup] = ""
-            params[:frame][:content][slot.name].delete(:value)      
-          end
-        end
-      rescue
-      end
-      arrange_slots()
-      if params[:frame][:template] != @frame.template
-        template_change = true
-      end
-      if params[:clipboard_slots] != nil
-        clipboard_slots = params[:clipboard_slots]
-      else
-        clipboard_slots = []
-      end
-      presentation_frames = @presentation.root_frame.all_children;
-      presentation_frames.each do |frame|
-        frame.slots.each do |slot|
-          if slot.in_template? == false && clipboard_slots.include?(frame.id.to_s+"_"+slot.name) == false
-            frame.content.delete(slot.name)
-            logger.debug("Deleted Slot: "+slot.name)
-            frame.save
-          end
-        end
-      end
-      @frame.update_attributes(params[:frame])
-      if template_change
-        render :inline => "reload"
-      else
-        render :inline => "OK"
-      end
-    end
     def rename_frame
       @frame.update_attributes(:title => params[:title])
       render :inline => ""
     end
     def frames
-      render :partial => "fassets_presentations/presentations/frames", :locals => {:presentation => @presentation, :wysiwyg => true}
+      render :partial => "fassets_presentations/presentations/frames", :locals => {:presentation => @presentation}
     end
     def update
       arrange_slots()
@@ -135,15 +70,10 @@ module FassetsPresentations
           return
         end
       end
-      if params[:clipboard_slot] != nil
-        clipboard_slots = params[:clipboard_slot].keys
-      else
-        clipboard_slots = []
-      end
       presentation_frames = @presentation.root_frame.all_children;
       presentation_frames.each do |frame|
         frame.slots.each do |slot|
-          if slot.in_template? == false && clipboard_slots.include?(frame.id.to_s+"_"+slot.name) == false
+          if slot.in_template? == false
             if params[:frame][:content].keys.include?(slot.name) && @frame.id == frame.id
               params[:frame][:content].delete(slot.name)
             end
@@ -159,31 +89,6 @@ module FassetsPresentations
         flash[:error] = "Could not update frame!"
       end
       redirect_to edit_presentation_frame_path(@presentation, @frame)
-    end
-    def update_wysiwyg
-      params[:frame][:content].each do |slot_name, value|
-        begin
-          params[:frame][:content][slot_name][:markup] = html_to_markdown(params[:frame][:content][slot_name][:markup])
-        rescue Exception => ex
-          logger.debug("Error:"+ex)
-          flash[:error] = "Could not update frame - Conversion to markup failed!"
-          render :inline => "Error"
-        end
-      end
-      arrange_slots()
-      if params[:frame][:template] != @frame.template
-        template_change = true
-      end
-      if @frame.update_attributes(params[:frame])
-        flash[:notice] = "frame succesfully updated!"
-      else
-        flash[:error] = "Could not update frame!"
-      end
-      if template_change
-        render :inline => "reload"
-      else
-        render :inline => "OK"
-      end
     end
     def show
       redirect_to presentation_path(@presentation) + "##{@frame.position}"
@@ -283,21 +188,6 @@ module FassetsPresentations
       params[:frame][:template] = params[:template]
       #@frame.update_attributes(params[:frame])
       render :inline => ""
-    end
-    def reload_slots
-      render :template => "fassets_presentations/frames/edit_wysiwyg", :layout => false, :locals => {:is_root_frame => false}
-    end
-    def editor_clipboard
-      clipboard_slots = []
-      presentation_frames = @presentation.root_frame.all_children;
-      presentation_frames.each do |frame|
-        frame.slots.each do |slot|
-          if slot.in_template? == false
-            clipboard_slots << [frame, slot]
-          end
-        end
-      end
-      render :partial => "fassets_presentations/frames/clipboard", :locals => {:clipboard_slots => clipboard_slots}
     end
     def tray_slot
       slot = @frame.slot(params[:name])

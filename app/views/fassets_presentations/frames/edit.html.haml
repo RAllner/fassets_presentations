@@ -11,7 +11,6 @@
         =button_to "Edit Presentation", "", :method => :get ,:class => "edit_button", :asset_id => @presentation.asset.id, :content_id => @presentation.asset.content_id
         =render :partial => "assets/put_on_tray"
         =button_to "Delete Frame", presentation_frame_path(@presentation, @frame), :method => :delete, :onclick => "return confirm('Are you sure?')"
-        =button_to "WYSIWYG-Editor", "/editor"+edit_wysiwyg_presentation_frame_path(@presentation, @frame), :method => :get
   -else
     #type
       =@content.media_type.capitalize
@@ -24,7 +23,7 @@
         =button_to "Delete Frame", delete_presentation_path(@content), :method => :delete, :onclick => "return confirm('Are you sure?')"
 
 #sidebar
-  =render :partial => "fassets_presentations/presentations/frames", :locals => {:presentation =>  @presentation, :wysiwyg => false}
+  =render :partial => "fassets_presentations/presentations/frames", :locals => {:presentation =>  @presentation}
 
 #main.edit{:presentation_id => @presentation.id.to_s}
   -unless is_root_frame

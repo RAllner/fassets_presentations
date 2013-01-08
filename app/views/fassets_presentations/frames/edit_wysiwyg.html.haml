@@ -1,4 +1,3 @@
-=javascript_include_tag 'fassets_presentations/frames_wysiwyg'
 =stylesheet_link_tag 'fassets_presentations/templates/'+@presentation.template+'/editor.css'
   
 =button_to "Edit Presentation", "", :method => :get ,:class => "edit_button", :asset_id => @presentation.asset.id, :content_id => @presentation.asset.content_id, :style=>"display:none", :id => "edit_presentation_button"
@@ -7,7 +6,7 @@
 =button_to "Markup-Editor", edit_presentation_frame_path(@presentation, @frame), :method => :get,:style=>"display:none", :id => "markup_button" 
       
 #sidebar
-  =render :partial => "fassets_presentations/presentations/frames", :locals => {:presentation =>  @presentation, :frame => @frame, :wysiwyg => true}
+  =render :partial => "fassets_presentations/presentations/frames", :locals => {:presentation =>  @presentation, :frame => @frame}
 
 #main{:presentation_id => @presentation.id, :frame_id => @frame.id}
   =hidden_field_tag "frame_template", @frame.template, :class => "frame_template"
@@ -17,6 +16,5 @@
       -unless slot.in_template?
         =hidden_field_tag "clipboard_slot", "#{frame.id}_#{slot.name}", :class => "clipboard_slot"
   -unless is_root_frame
-    =link_to "Edit Page", "/editor" + request.path, :id =>  "edit_link", :style => "display:none", :data => {:save_url => edit_wysiwyg_presentation_frame_path(@presentation, @frame)}
-    %ul#slots_wysiwyg
-      =render :partial => "fassets_presentations/frames/slot_wysiwyg", :collection => @frame.slots
+    =link_to "Edit Page", "/editor" + request.path, :id =>  "edit_link", :style => "display:none"}
+
