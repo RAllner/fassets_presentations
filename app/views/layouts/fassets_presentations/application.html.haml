@@ -1,5 +1,10 @@
 -content_for :core_head do
-  =stylesheet_link_tag 'fassets_presentations/application'
-  =javascript_include_tag 'fassets_presentations/application'
-
-=render :template => 'layouts/fassets_core/application'
+	=stylesheet_link_tag 'fassets_presentations/application'
+	=javascript_include_tag 'fassets_presentations/application'
+%body
+	=render partial: "layouts/fassets_presentations/navbar"
+	.container-fluid
+		.row-fluid
+			.span12
+				.leaderboard
+					=render :template => 'layouts/fassets_core/application'

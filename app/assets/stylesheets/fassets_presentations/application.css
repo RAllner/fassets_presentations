@@ -6,5 +6,6 @@
  *= require fassets_presentations/master
  *= require fassets_presentations/sidebar
  *= require jquery.ui.resizable
+ *= require fassets_presentations/bootstrap_own_styles
 */
 

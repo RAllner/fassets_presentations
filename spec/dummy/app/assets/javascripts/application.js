@@ -7,4 +7,5 @@
 //= require jquery
 //= require jquery_ujs
 //= require fassets_core
+//= require twitter/bootstrap
 //= require_tree .
