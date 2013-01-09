@@ -1,10 +1,10 @@
  body {
-  padding-top: 180px;
-  padding-bottom: 40px;
+  padding-top: 60px;
+  padding-bottom: 30px;
   background-color: #eeeeee;
 }
 .nav li {
- padding-top: 5px;
+  padding-top: 5px;
 }
 
 .sidebar-nav {
@@ -43,12 +43,18 @@
 }
 
 .navbar-inner {
+  max-height: 50px;
 	background-image: -webkit-linear-gradient(top, #323232,#1e1e1e);
 }
 
 .navbar .nav > li > a {
 	color: #FFFFFF
 }
+
+.navbar .nav li.active > a {
+  color: #FF6600
+}
+
 .navbar-text > i {
   margin-right: 5px;
 }
@@ -67,4 +73,10 @@
 .navbar-text {
 	padding-top: 5px;
 	color:#FFFFFF
+}
+.navbar .nav li.dropdown.open > .dropdown-toggle,
+.navbar .nav li.dropdown.active > .dropdown-toggle,
+.navbar .nav li.dropdown.open.active > .dropdown-toggle {
+  background-color: #e5e5e5;
+  color: #FF6600;
 }

@@ -15,33 +15,34 @@
 						%a{:href => "#" } Katalog
 				%ul.nav
 					%li.dropdown
-						%a.dropdown-toggle{:href =>"#"} Folie
-						%b.caret
-						%ul.dropdown-menu
-							%li
-								%a{:href => "#"}
-									%i.icon-search
-										R&uuml;ckg&auml;ngig
-							%li
-								%a{:href => "#"}
-									%i.icon-search
-										Vorw&auml;rts
-							%li
-								%a{:href => "#"}
-									%i.icon-search
-										Speichern
-							%li
-								%a{:href => "#"}
-									%i.icon-search
-										L&ouml;schen
-							%li
-								%a{:href => "#"}
-									%i.icon-search
-										Folien&uuml;bersicht
-							%li
-								%a{:href => "#"}
-									%i.icon-search
-										Form &auml;ndern
+						%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+							Folie
+							%b.caret
+							%ul.dropdown-menu
+								%li
+									%a{:href => "#"}
+										%i.icon-search
+											R&uuml;ckg&auml;ngig
+								%li
+									%a{:href => "#"}
+										%i.icon-search
+											Vorw&auml;rts
+								%li
+									%a{:href => "#"}
+										%i.icon-search
+											Speichern
+								%li
+									%a{:href => "#"}
+										%i.icon-search
+											L&ouml;schen
+								%li
+									%a{:href => "#"}
+										%i.icon-search
+											Folien&uuml;bersicht
+								%li
+									%a{:href => "#"}
+										%i.icon-search
+											Form &auml;ndern
 				%p.navbar-text.pull-right
 					%i.icon-user.icon-white 
 					= render :partial => "shared/session"
