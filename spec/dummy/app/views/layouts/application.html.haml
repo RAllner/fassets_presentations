@@ -20,8 +20,7 @@
       .row
         .span8
           = render :partial => "layouts/fassets_presentations/navbar"
-          = yield :catalogs_selector
-          -#= render :partial => "shared/session"
+          = render :partial => "layouts/fassets_presentations/editempty"
         .span4
           = yield :layout
     = yield :tray if user_signed_in?

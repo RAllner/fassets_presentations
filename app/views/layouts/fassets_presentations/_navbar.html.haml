@@ -11,8 +11,35 @@
 				%img{:rel => "logoo", :src => "#{asset_path('fassets_presentations/fassets_horizontal_white.png')}", :width => "70px"}
 			.nav-collapse
 				%ul.nav
-					%li.active
-						%a{:href => "#" } Katalog
+					%li.dropdown
+						%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+							Kataloge
+							%b.caret
+							%ul.dropdown-menu
+								%li
+									%a{:href => "#"}
+										%i.icon-search
+											R&uuml;ckg&auml;ngig
+								%li
+									%a{:href => "#"}
+										%i.icon-search
+											Vorw&auml;rts
+								%li
+									%a{:href => "#"}
+										%i.icon-search
+											Speichern
+								%li
+									%a{:href => "#"}
+										%i.icon-search
+											L&ouml;schen
+								%li
+									%a{:href => "#"}
+										%i.icon-search
+											Folien&uuml;bersicht
+								%li
+									%a{:href => "#"}
+										%i.icon-search
+											Form &auml;ndern
 				%ul.nav
 					%li.dropdown
 						%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}

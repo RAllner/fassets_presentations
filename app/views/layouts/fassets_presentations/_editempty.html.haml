@@ -1,0 +1,22 @@
+.container-fluid
+  .row-fluid
+    .span8.offset2.pagination-centered
+      .leaderboard
+        %h1 Keine Folien vorhanden
+        %p
+          Es sind f&uuml;r 
+          %a{:href => "#"} Dieses Projekt
+          noch keine Folien vorhanden, klicken sie hier um neue Foliens&auml;tze zu entwerfen
+        .btn-group
+          %a.btn.btn-primary.btn-large{:href => "#"}
+            %i.icon-user.icon-white
+            Folie erstellen
+          %a.btn.btn-primary.btn-large.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+            %span.caret
+          %ul.dropdown-menu
+            %li
+              %a{:href => "#"}
+              Layout 1
+            %li
+              %a{:href => "#"}
+              Layout 2

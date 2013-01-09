@@ -1,3 +1,5 @@
+<!-- Hier wird ein Slot beschrieben. Wo liegt er wie groß ist er dann und so weiter -->
+
 -if slot.in_template? or (!slot.asset.nil? or !slot["markup"].blank?)
   %li.slot{:id => "slot_#{slot.name}", :width => "#{slot['width']}", :height => "#{slot['height']}", :style => slot.in_template? ? "" : "display:none"}
     .name
