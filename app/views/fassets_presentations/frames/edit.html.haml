@@ -1,42 +1,42 @@
 <!-- Ist nicht das Edit, dass wir zu sehen bekommen! -->
 
-=javascript_include_tag 'fassets_presentations/frames'
-=stylesheet_link_tag 'fassets_presentations/templates/'+@presentation.template+"/editor.css"
-=content_for :h1 do
-  -unless is_root_frame
-    #type
-      Frame
-    #title
-      =link_to @frame.title, presentation_frame_path(@presentation, @frame)
-    #action
-      %span.action
-        =button_to "Edit Presentation", "", :method => :get ,:class => "edit_button", :asset_id => @presentation.asset.id, :content_id => @presentation.asset.content_id
-        =render :partial => "assets/put_on_tray"
-        =button_to "Delete Frame", presentation_frame_path(@presentation, @frame), :method => :delete, :onclick => "return confirm('Are you sure?')"
-  -else
-    #type
-      =@content.media_type.capitalize
-    #title
-      =link_to @content.asset.name, presentation_path(@content)
-    #action
-      %span.action
-        =button_to "Edit Presentation", "", :method => :get ,:class => "edit_button", :asset_id => @presentation.asset.id, :content_id => @presentation.asset.content_id
-        =render :partial => "assets/put_on_tray"
-        =button_to "Delete Frame", delete_presentation_path(@content), :method => :delete, :onclick => "return confirm('Are you sure?')"
+/ =javascript_include_tag 'fassets_presentations/frames'
+/ =stylesheet_link_tag 'fassets_presentations/templates/'+@presentation.template+"/editor.css"
+/ =content_for :h1 do
+/   -unless is_root_frame
+/     #type
+/       Frame
+/     #title
+/       =link_to @frame.title, presentation_frame_path(@presentation, @frame)
+/     #action
+/       %span.action
+/         =button_to "Edit Presentation", "", :method => :get ,:class => "edit_button", :asset_id => @presentation.asset.id, :content_id => @presentation.asset.content_id
+/         =render :partial => "assets/put_on_tray"
+/         =button_to "Delete Frame", presentation_frame_path(@presentation, @frame), :method => :delete, :onclick => "return confirm('Are you sure?')"
+/   -else
+/     #type
+/       =@content.media_type.capitalize
+/     #title
+/       =link_to @content.asset.name, presentation_path(@content)
+/     #action
+/       %span.action
+/         =button_to "Edit Presentation", "", :method => :get ,:class => "edit_button", :asset_id => @presentation.asset.id, :content_id => @presentation.asset.content_id
+/         =render :partial => "assets/put_on_tray"
+/         =button_to "Delete Frame", delete_presentation_path(@content), :method => :delete, :onclick => "return confirm('Are you sure?')"
 
-#sidebar
-  =render :partial => "fassets_presentations/presentations/frames", :locals => {:presentation =>  @presentation}
+/ #sidebar
+/   =render :partial => "fassets_presentations/presentations/frames", :locals => {:presentation =>  @presentation}
 
-#main.edit{:presentation_id => @presentation.id.to_s}
-  -unless is_root_frame
-    =form_for  [@presentation,  @frame], :url => presentation_frame_path(@presentation,@frame),:html => {:id => "edit_frame"} do |f|
-      -@presentation.root_frame.all_children.each do |frame|
-        -frame.slots.each do |slot|
-          -unless slot.in_template?
-            =hidden_field_tag "[clipboard_slot][#{frame.id}_#{slot.name}]", "#{frame.id}_#{slot.name}", :class => "clipboard_slot"
-      =submit_tag "Save", :id => "frame_save"
-      #edit_warning{:style => "visibility: hidden"}There are unsaved changes on this frame
-      #frame_form
-        =render :partial => "fassets_presentations/frames/form", :object => f, :locals => {:disable_self => true}
-      %ul#slots
-        =render :partial => "fassets_presentations/frames/slot", :collection => @frame.slots
+/ #main.edit{:presentation_id => @presentation.id.to_s}
+/   -unless is_root_frame
+/     =form_for  [@presentation,  @frame], :url => presentation_frame_path(@presentation,@frame),:html => {:id => "edit_frame"} do |f|
+/       -@presentation.root_frame.all_children.each do |frame|
+/         -frame.slots.each do |slot|
+/           -unless slot.in_template?
+/             =hidden_field_tag "[clipboard_slot][#{frame.id}_#{slot.name}]", "#{frame.id}_#{slot.name}", :class => "clipboard_slot"
+/       =submit_tag "Save", :id => "frame_save"
+/       #edit_warning{:style => "visibility: hidden"}There are unsaved changes on this frame
+/       #frame_form
+/         =render :partial => "fassets_presentations/frames/form", :object => f, :locals => {:disable_self => true}
+/       %ul#slots
+/         =render :partial => "fassets_presentations/frames/slot", :collection => @frame.slots

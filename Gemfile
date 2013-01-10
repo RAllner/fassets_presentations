@@ -18,6 +18,7 @@ gem "twitter-bootstrap-rails"
 gem "jquery-ui-rails"
 gem "less-rails"
 gem "therubyracer", '0.10.2'
+
 # Declare any dependencies that are still in development here instead of in
 # your gemspec. These might include edge Rails or gems from your path or
 # Git. Remember to move these dependencies to your gemspec before releasing
