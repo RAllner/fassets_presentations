@@ -6,6 +6,7 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
   %body
+    = render :partial => "layouts/fassets_presentations/navbar"
     .flash
       -if flash[:notice]
         .message
@@ -16,10 +17,9 @@
       -if flash[:alert]
         .alert_message
           =flash[:error]
-    .container
-      .row
+    .container-fluid
+      .row-fluid
         .span8
-          = render :partial => "layouts/fassets_presentations/navbar"
           = render :partial => "layouts/fassets_presentations/editempty"
         .span4
           = yield :layout
