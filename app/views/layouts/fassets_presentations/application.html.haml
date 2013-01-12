@@ -1,6 +1,38 @@
 -content_for :core_head do
 	=stylesheet_link_tag 'fassets_presentations/application'
 	=javascript_include_tag 'fassets_presentations/application'
+
+-content_for :slide_options do
+	%ul.nav
+		%li.dropdown
+			%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+				Folie
+				%b.caret
+				%ul.dropdown-menu
+					%li
+						%a{:href => "#"}
+							%i.icon-search
+								R&uuml;ckg&auml;ngig
+					%li
+						%a{:href => "#"}
+							%i.icon-search
+								Vorw&auml;rts
+					%li
+						%a{:href => "#"}
+							%i.icon-search
+								Speichern
+					%li
+						%a{:href => "#"}
+							%i.icon-search
+								L&ouml;schen
+					%li
+						%a{:href => "#"}
+							%i.icon-search
+								Folien&uuml;bersicht
+					%li
+						%a{:href => "#"}
+							%i.icon-search
+								Form &auml;ndern
 %body	
 	=render partial: "layouts/fassets_presentations/navbar"
 	=render :template => 'layouts/fassets_core/application'
