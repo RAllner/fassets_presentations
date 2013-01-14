@@ -1,15 +1,17 @@
-Rails.application.routes.draw do
-  match '/editor(/*requested_uri)' => "FassetsPresentations::Frames#editor", :as => :mercury_editor
-  scope '/mercury' do
-    match ':type/:resource' => "mercury#resource"
-  end
+# Rails.application.routes.draw do
+#   match '/editor(/*requested_uri)' => "FassetsPresentations::Frames#editor", :as => :mercury_editor
+#   scope '/mercury' do
+#     match ':type/:resource' => "mercury#resource"
+#   end
+
+# end
+
+FassetsPresentations::Engine.routes.draw do
   resources :presentations do
     resources :frames do
     end
-end
-end
-
-FassetsPresentations::Engine.routes.draw do
+  end
+  root to: 'Catalogs#index'
   match '/to_markdown' => 'Frames#to_markdown'
   match '/to_html' => 'Frames#to_html'
   match '/citation' => 'Frames#citation'
